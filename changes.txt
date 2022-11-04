@@ -1,0 +1,17 @@
+Some points of clarification, some minor tweaks, an additional bonus, and explaining my thought process.:
+
+The environment should end with all nodes having degree <= 3. The point of the 'connecting nodes with 5 steps in either direction' is so that the graph maintains non-trivial distances - if you add edges purely at random, it becomes very easy to build a graph where any node is within a few steps of any other node, which would ruin the drama of the chase. (Look up the small world phenomenon, if you are curious.)
+
+For the partial predator information cases - I originally said that you know where the predator is at the start. My thinking here was that if you start without knowing where the predator is, you may not have enough time to find the predator before it catches you. However, because the agent knows the predator always moves closer to you, and because the degree of each node is so small, it's hard to lose track of the predator once you know where it is!
+So I want to make the following change, which I will refer to as THE EASILY DISTRACTED PREDATOR. Instead of always moving to close the distance, the predator gets easily distracted - with probability 0.6, the predator will move to close the distance, but with probability 0.4, the predator moves to one of its neighbors uniformly at random. This means that on average the predator is moving to close the distance, but it is not guaranteed in any round.
+Please adjust the Partial Predator Information Environments and Agents accordingly (Agents 5, 6, 7, 8). Note that all this is, really, is an update to how the transition probabilities for the predator are determined.
+For the last four bullet points, when surveying a node has the possibility of making a mistake:
+
+Bullet 1: To generate data to compare Agent 7 and 8 here, you only need to modify how the results of the survey are returned.
+Bullet 2: In the language we've been developing, this is an update to your observation model. How does this new observation model / observation probability get factored into your update for the predator and prey beliefs?
+Bullet 3: To complete this, you need to implement the changes from Bullet 2 above to how the belief is updated. But notice that I am not asking you to change how Agent 7 and 8 make decisions, I'm simply asking you to run them with the new belief states/updates.
+Bullet 4: Agent 9 is hypothetical, does not need to be implemented, but describe any changes you might make to Agent 7/8 to try to improve on their performance in this environment. In particular, what if anything for the logic of Agent 9 needs to change in comparison to Agent 8?
+
+NOTE: If your group is a 3 person group, you MUST do the first bonus. Rather than consider all three partial information environments separately, focus only on the combined partial information environment, with the easily distracted predator.
+Additional Bonus, for anyone who is interested:
+Build Agent 9, and compare it to Agent 7 and 8 in the noisy-survey environment.
