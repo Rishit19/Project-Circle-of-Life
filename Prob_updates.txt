@@ -1,0 +1,108 @@
+Partial Prey
+
+--> At the start
+
+    P(0,N) = 1/49, for all N not containig the Agent
+           = 0, if N contained the Agent
+
+--> When Agent surveys at time t
+
+    Surveyed a node X
+
+    Case 1: Prey is not found at node X
+
+        P(prey is at node N | surevey did not find prey at X) = P(Prey is at N)/P(Prey is not at X), for all N != X
+                                                              = 0, if N == X
+    
+    Case 2: Prey is found at node X 
+
+            P(Prey is at node N | survey finds prey at X) = 0, for all N != X
+                                                          = 1, if N == X
+
+--> When Agent moves at time t
+    
+    Case 1: Prey is not found at node X
+
+            P(Prey is at node N | prey not found at X) = P(Prey is at Node N)/P(Prey is not at X), for all N != X
+                                                       = 0, if N == X
+    
+    Case 2: Prey is found at X
+
+            P(Prey is at Node N | Prey found at X) = 0, for all N != X
+                                                   = 1, if N == X
+
+--> When Prey Moves at time (t+1)
+
+    P(Prey is at N Now) = 
+    Summation(i = 1 to 50) P(Prey is at N Now and prey was at i then) 
+    = P(Prey was at N then and Prey is at N Now) + summation(i=1 to 50 and i != N) P(Prey was at I then) * P(Prey is at N now | Prey was at i then)
+
+
+
+Partial Predator
+
+--> At the start
+
+P(0,N)  = 0, for all N != Predator position
+        = 1, if N == Predator position
+
+--> When Agent surveys at time t
+
+    Surveyed a node X
+
+    Case 1: Predator is not found at node X
+
+        P(Predator is at node N | surevey did not find Predator at X) = P(Predator is at N)/P(Predator is not at X), for all N != X
+                                                                      = 0, if N == X
+    
+    Case 2: Predator is found at node X 
+
+            P(Predator is at node N | survey finds Predator at X) = 0, for all N != X
+                                                                  = 1, if N == X
+
+--> When Agent moves at time t
+    
+    Case 1: Predator is not found at node X
+
+            P(Predator is at node N | Predator not found at X) = P(Predator is at Node N)/P(Predator is not at X), for all N != X
+                                                               = 0, if N == X
+    
+    Case 2: Predator is found at X
+
+            P(Predator is at Node N | Predator found at X) = 0, for all N != X
+                                                           = 1, if N == X
+
+--> When Predator moves at time (t+1)
+
+    P(Predator is at Node N now)
+    = summation(i=1 to 50) P(Predator is at N now and Predator was at i then)
+    = summation(i=1 to 50) P(Predator is at i then and Predator was at n now)
+    = P(Predator was at N then and Predator is at N now) + summation(i=1 to 50, i != N) P(Predator was at i then) * P(Predator is at N now | Predator was at i then)
+      --------------------------------------------------   
+                            ↓
+                            0
+
+Complete Partial
+
+--> Probability update of prey from partial prey scenario
+--> Probability update of predator from partial predator scenario
+
+Complete Partial defective drone
+
+The only change happens when Agent surveys or moves and the dron gives false negative
+
+--> When Agent surveys node X at time t
+
+    Case 1: Prey not found
+
+            P(Prey is at node N | surevey did not find Prey at X)    = (P(Prey is at N)*(0.1))/(1-0.9*P(Prey is at X)), for all N != X
+                                                                     = (P(Prey is at N)*(0.1))/(1-0.9*P(Prey is at N)), if N == X
+    
+    >> Rest of the cases remain the same
+
+
+
+
+                                                            
+
+
